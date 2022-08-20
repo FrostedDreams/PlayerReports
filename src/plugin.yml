@@ -1,0 +1,8 @@
+name: PlayerReports
+main: me.frosteddreams.PlayerReports
+version: 0.1
+author: FrostedDreams
+api-version: 1.16
+
+commands:
+  report:
