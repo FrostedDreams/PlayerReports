@@ -1,8 +1,24 @@
 name: PlayerReports
-main: me.frosteddreams.PlayerReports
+main: me.frosteddreams.playerreports.PlayerReports
 version: 0.1
 author: FrostedDreams
 api-version: 1.16
 
 commands:
   report:
+    description: Use to report players
+    permission: playerreports.use
+  reports:
+    description: Use to view player reports
+    permission: playerreports.staff
+
+permissions:
+  playerreports.*:
+    description: Every permission in PlayerReports
+    children:
+      playerreports.use: true
+      playerreports.staff: true
+  playerreports.use:
+    description: Allows use of the report command
+  playerreports.staff:
+    description: Allows use of the reports command (staff)
