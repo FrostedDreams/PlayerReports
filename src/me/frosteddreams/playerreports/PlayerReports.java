@@ -11,15 +11,11 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PlayerReports extends JavaPlugin {
 
     private final List<Report> activeReports = new ArrayList<>();
-    private final Map<String, String> langMessages = new HashMap<>();
-    private FileManager fileManager;
     private GUIManager guiManager;
 
     @Override
@@ -44,12 +40,8 @@ public class PlayerReports extends JavaPlugin {
     }
 
     private void registerManagers() {
-        this.fileManager = new FileManager(this);
+        new FileManager(this);
         this.guiManager = new GUIManager();
-    }
-
-    public FileManager getFileManager() {
-        return fileManager;
     }
 
     public GUIManager getGuiManager() {
@@ -58,9 +50,5 @@ public class PlayerReports extends JavaPlugin {
 
     public List<Report> getActiveReports() {
         return activeReports;
-    }
-
-    public Map<String, String> getLangMessages() {
-        return langMessages;
     }
 }

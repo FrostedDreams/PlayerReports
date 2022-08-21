@@ -1,19 +1,17 @@
 package me.frosteddreams.playerreports.managers;
 
-import me.frosteddreams.playerreports.PlayerReports;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public final class MessageManager {
 
     private static final String IMPROPER_LANG = "&b[&dReport&b] &cThe lang.yml is not setup correctly.";
-    private static PlayerReports playerReports;
-
-    public MessageManager(PlayerReports playerReports) {
-        MessageManager.playerReports = playerReports;
-    }
+    private static final Map<String, String> langMessages = new HashMap<>();
 
     public static void sendMessage(CommandSender sender, String key) {
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', getLangMessage(key)));
@@ -28,16 +26,20 @@ public final class MessageManager {
     }
 
     private static String getLangMessage(String key) {
-        if (playerReports.getLangMessages().get(key) == null) {
+        if (langMessages.get(key) == null) {
             return IMPROPER_LANG;
         }
-        return playerReports.getLangMessages().get(key).replaceAll("%prefix%", playerReports.getLangMessages().get("REPORT_PREFIX"));
+        return langMessages.get(key).replaceAll("%prefix%", langMessages.get("REPORT_PREFIX"));
     }
 
     private static String getLangMessage(String key, Player p, Player target) {
-        if (playerReports.getLangMessages().get(key) == null) {
+        if (langMessages.get(key) == null) {
             return IMPROPER_LANG;
         }
-        return playerReports.getLangMessages().get(key).replaceAll("%prefix%", playerReports.getLangMessages().get("REPORT_PREFIX")).replaceAll("%player%", p.getName()).replaceAll("%target%", target.getName());
+        return langMessages.get(key).replaceAll("%prefix%", langMessages.get("REPORT_PREFIX")).replaceAll("%player%", p.getName()).replaceAll("%target%", target.getName());
+    }
+
+    public static Map<String, String> getLangMessages() {
+        return langMessages;
     }
 }
